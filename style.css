@@ -1,0 +1,302 @@
+:root {
+    /* Paleta de Colores - Monocromía Azul */
+    --primary-color: #2563eb;       /* Azul Rey (Royal Blue) */
+    --primary-dark: #1e40af;        /* Azul Profundo */
+    --primary-light: #dbeafe;       /* Azul muy claro para fondos */
+    
+    --secondary-color: #475569;     /* Gris azulado metálico */
+    
+    --accent-success: #0ea5e9;      /* Celeste brillante (Sky Blue) - Reemplaza verde */
+    --accent-warning: #06b6d4;      /* Cian (Cyan) - Reemplaza amarillo */
+    --accent-danger: #3b82f6;       /* Azul vibrante - Reemplaza rojo (manteniendo tono de alerta en gama azul) */
+    
+    --bg-app: #f0f9ff;              /* Fondo de página: Azul Alicia muy pálido */
+    --bg-surface: #ffffff;          /* Blanco puro */
+    
+    --text-main: #0f172a;           /* Azul noche muy oscuro */
+    --text-secondary: #334155;      /* Gris azulado medio */
+    
+    --border-color: #94a3b8;        /* Borde visible gris azulado */
+    
+    --shadow-sm: 0 1px 2px 0 rgba(37, 99, 235, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(37, 99, 235, 0.1), 0 4px 6px -4px rgba(37, 99, 235, 0.05);
+    
+    --radius: 12px;
+}
+
+/* --- CONFIGURACIÓN GENERAL --- */
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    /* Fondo base gris muy claro */
+    background-color: #f8fafc;
+    /* Patrón de puntos en tono celeste suave */
+    background-image: radial-gradient(#bae6fd 1.5px, transparent 1.5px);
+    background-size: 24px 24px; /* Espaciado del patrón */
+    
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.container {
+    background: var(--bg-surface);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1), 0 8px 10px -6px rgba(37, 99, 235, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+    border: 2px solid #3b82f6; /* Borde celeste destacado */
+    transition: all 0.3s ease;
+}
+
+h1, h2, h3, h4 { color: var(--primary-dark); margin-top: 0; font-weight: 700; }
+h1 { font-size: 2.2rem; margin-bottom: 2rem; letter-spacing: -0.03em; }
+
+.hidden { display: none !important; }
+
+/* --- VARIABLES MODAL --- */
+.btn-variables {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-light);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    z-index: 100;
+    transition: all 0.2s;
+}
+.btn-variables:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+}
+
+.modal-variables {
+    display: none;
+    position: absolute;
+    top: 65px;
+    right: 20px;
+    background: white;
+    border: 2px solid var(--primary-color);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    z-index: 101;
+    width: 280px;
+    text-align: left;
+}
+.modal-variables li { border-bottom: 1px solid var(--primary-light); color: var(--text-secondary); padding: 8px 0; }
+.modal-variables ul { list-style: none; padding: 0; }
+
+/* --- HEADER --- */
+.header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 20px;
+}
+
+/* --- TARJETAS MENÚ --- */
+.icon-grid { display: flex; gap: 30px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+.icon-card {
+    padding: 40px 20px;
+    border: 2px solid var(--primary-light);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 220px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.icon-card:hover {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+    transform: translateY(-5px);
+}
+.icon { font-size: 50px; margin-bottom: 20px; }
+
+/* --- INPUTS --- */
+.grid-inputs, .grid-inputs-dec {
+    display: grid;
+    gap: 20px;
+    margin: 30px 0;
+    background: var(--primary-light); /* Fondo azul muy claro */
+    padding: 30px;
+    border-radius: var(--radius);
+    border: 1px solid #bfdbfe;
+}
+.grid-inputs { grid-template-columns: 1fr 1fr; }
+.grid-inputs-dec { display: flex; justify-content: center; flex-wrap: wrap; }
+
+.input-unit label, .input-group label {
+    color: var(--primary-dark);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-box, input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+    background: white;
+}
+.input-box:focus, input:focus { border-color: var(--primary-color); }
+
+/* --- SHANNON FANO CARDS --- */
+.proceso-container-horizontal {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 30px auto;
+}
+.card-paso {
+    background: white;
+    border: 2px solid var(--primary-light);
+    border-radius: 10px;
+    padding: 15px 10px;
+    min-width: 100px;
+    box-shadow: var(--shadow-sm);
+}
+.item-v { border-bottom: 1px solid var(--primary-light); padding: 5px 0; color: var(--text-secondary); }
+.linea-roja-vertical { border-right: 4px solid var(--accent-warning) !important; } /* Ahora es cian/celeste */
+.opaco { opacity: 0.4; }
+
+/* --- RESULTADOS --- */
+.info-sumas, .stats-container {
+    background: #f0f9ff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #bae6fd;
+    border-left: 6px solid var(--primary-color);
+    margin-top: 25px;
+    text-align: left;
+    width: 100%;
+    color: var(--text-secondary);
+}
+
+/* --- TABLAS REFORZADAS --- */
+.tabla-final {
+    width: 100%;
+    border-collapse: collapse; /* Bordes colapsados para líneas nítidas */
+    margin-top: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.tabla-final th, .tabla-final td {
+    border: 3px solid #94a3b8; /* Bordes más gruesos y visibles */
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.tabla-final th {
+    background: var(--primary-dark);
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 3px solid var(--primary-dark); /* Borde grueso en el encabezado */
+}
+
+.tabla-final tr:nth-child(even) {
+    background-color: #f8fafc; /* Alternancia sutil */
+}
+
+.tabla-final tr:hover {
+    background-color: var(--primary-light); /* Hover azul claro */
+}
+
+/* --- BOTONES --- */
+button { font-family: inherit; transition: all 0.2s; }
+
+.btn-primary, .btn-generate {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 0 var(--primary-dark); /* Efecto 3D sutil */
+    margin-top: 5px;
+    cursor: pointer;
+}
+.btn-primary:active, .btn-generate:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--primary-dark);
+}
+
+.btn-nav {
+    background: white;
+    color: var(--primary-white);
+    border: 2px solid var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 5px;
+}
+.btn-nav:hover:not(:disabled) {
+    background: var(--primary-color);
+    color: white;
+}
+.btn-nav:disabled {
+    border-color: #cbd5e1;
+    color: #cbd5e1;
+    cursor: not-allowed;
+}
+
+.btn-random {
+    background: var(--accent-warning); /* Celeste/Cian */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #0891b2; /* Sombra cian oscuro */
+}
+.btn-random:hover { background: #0891b2; }
+
+.btn-back {
+    background: white;
+    color: var(--secondary-color);
+    border: 2px solid #cbd5e1;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-back:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+    .container { padding: 15px; }
+    .grid-inputs { grid-template-columns: 1fr; }
+    .header-section { flex-direction: column; gap: 10px; }
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codificador Pro - Shannon-Fano & Lynch-Davisson</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="menu-principal" class="container">
+        <h1>Codificación de fuente</h1>
+        <p style="color: var(--accent-success); font-weight: 600; margin-top: -25px; margin-bottom: 30px; font-size: 1.2rem;">
+            Seleccione el tipo
+        </p>
+        
+        <div class="icon-grid">
+            <div class="icon-card" onclick="mostrarSeccion('shannon')">
+                <div class="icon">📊</div>
+                <span>Shannon-Fano</span>
+            </div>
+            <div class="icon-card" onclick="mostrarSeccion('lynch')">
+                <div class="icon">🔢</div>
+                <span>Lynch-Davisson</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <button class="btn-back" style="font-size: 0.8rem; padding: 5px 12px;" onclick="mostrarSeccion('creditos')">ℹ️ Créditos</button>
+        </div>
+    </div>
+
+    <div id="seccion-creditos" class="container hidden">
+        <div class="header-section">
+            <button class="btn-back" onclick="irAlMenu()">← Volver</button>
+            <h2 class="title-centered">Información del Proyecto</h2>
+            <div style="width: 80px;"></div>
+        </div>
+        
+        <div class="info-sumas" style="text-align: center; border-left: none; border-top: 6px solid var(--primary-color);">
+            <h3 style="margin-bottom: 10px; color: var(--primary-dark);">Escuela Politécnica Nacional</h3>
+            <p style="margin: 5px 0;"><strong>Asignatura:</strong> Teoría de la Información y Codificación</p>
+            <p style="margin: 5px 0;"><strong>Periodo Académico:</strong> 2025-B</p>
+            
+            <hr style="border: 0.5px solid var(--primary-light); margin: 25px 0;">
+            
+            <h4 style="color: var(--primary-color); text-transform: uppercase; letter-spacing: 1px;">Realizado por:</h4>
+            <ul style="list-style: none; padding: 0; line-height: 2.2; font-size: 1.1rem; color: var(--text-main);">
+                <li>Priscila Bonilla</li>
+                <li>Alexander Pazmiño</li>
+                <li>David Cola</li>
+                <li>Jostin Aldás</li>
+                <li>Yesly Castañeda</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="seccion-shannon" class="container hidden">
+        <div class="header-section">
+            <button class="btn-back" onclick="irAlMenu()">← Volver</button>
+            <h2 class="title-centered">Codificación de Shannon-Fano</h2>
+            <div style="width: 80px;"></div>
+        </div>
+
+        <div id="sf-paso-1">
+            <div class="input-group">
+                <label>Número de símbolos de la fuente:</label>
+                <input type="number" id="sf-n-simbolos" min="2" value="4">
+                <button class="btn-primary" onclick="generarInputsShannon()">Configurar</button>
+            </div>
+        </div>
+
+        <div id="sf-paso-2" class="hidden">
+            <div class="grid-inputs">
+                <div id="contenedor-simbolos"></div>
+                <div id="contenedor-probs"></div>
+            </div>
+            <div class="button-group">
+                <button class="btn-random" onclick="llenarAleatorio()">Llenar Aleatoriamente</button>
+                <button class="btn-generate" onclick="iniciarProceso()">Generar Código</button>
+            </div>
+        </div>
+
+        <div id="sf-visualizacion" class="hidden">
+            <div id="etapa-contenido"></div>
+            <div class="nav-etapas">
+                <button id="btn-prev" class="btn-nav" onclick="etapaAnterior()">Anterior</button>
+                <button id="btn-next" class="btn-nav" onclick="etapaSiguiente()">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="seccion-lynch" class="container hidden">
+        <div class="header-section">
+            <button class="btn-back" onclick="irAlMenu()">← Volver</button>
+            <h2 class="title-centered">Método de Lynch-Davisson</h2>
+            <div style="width: 80px;"></div>
+        </div>
+
+        <div id="ld-selector">
+            <p>¿Qué desea realizar?</p>
+            <div class="button-group">
+                <button class="btn-nav" onclick="configurarModoLD('codificar')">Codificar Secuencia</button>
+                <button class="btn-nav" onclick="configurarModoLD('decodificar')">Decodificar (Valor T)</button>
+            </div>
+        </div>
+
+        <div id="ld-input-cod" class="hidden">
+            <div class="input-group">
+                <label>Secuencia binaria:</label>
+                <input type="text" id="ld-secuencia" class="input-box" placeholder="Ej: 00101001">
+                <button class="btn-primary" onclick="iniciarLDCodificacion()">Comenzar Codificación</button>
+            </div>
+        </div>
+
+        <div id="ld-input-dec" class="hidden">
+            <div class="grid-inputs-dec">
+                <div class="input-unit">
+                    <label>Parámetro T</label>
+                    <input type="number" id="ld-valor-t" class="input-box" placeholder="0">
+                </div>
+                <div class="input-unit">
+                    <label>Parámetro q</label>
+                    <input type="number" id="ld-q-dec" class="input-box" placeholder="0">
+                </div>
+                <div class="input-unit">
+                    <label>Longitud N-1</label>
+                    <input type="number" id="ld-n-dec" class="input-box" placeholder="0">
+                </div>
+            </div>
+            <button class="btn-primary" onclick="iniciarLDDecodificacion()">Comenzar Decodificación</button>
+        </div>
+
+        <div id="ld-visualizacion" class="hidden" style="position: relative;">
+            <button class="btn-variables" onclick="toggleVariables()">Variables ⚙️</button>
+            
+            <div id="modal-vars" class="modal-variables">
+                <ul>
+                    <li><strong>T:</strong> Índice de la palabra a decodificar</li>
+                    <li><strong>q:</strong> Número de muestras redundantes (1s)</li>
+                    <li><strong>N-1:</strong> Número total de muestras</li>
+                    <li><strong>j:</strong> Número de orden dentro de las "q" muestras no redundantes</li>
+                    <li><strong>C:</strong> Coeficiente Combinatorio</li>
+                    <li><strong>Nj:</strong> Posición de la muestra no redundante</li>
+                </ul>
+            </div>
+
+            <div id="ld-etapa-contenido"></div>
+            <div class="nav-etapas">
+                <button id="btn-prev-ld" class="btn-nav" onclick="ldEtapaAnterior()">Anterior</button>
+                <button id="btn-next-ld" class="btn-nav" onclick="ldEtapaSiguiente()">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
